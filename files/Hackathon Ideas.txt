@@ -1,0 +1,9 @@
+Brainstorm ideas for the upcoming hackathon.
+
+- AI-powered study assistant for students
+- Smart expense tracker with analytics
+- Campus lost-and-found portal
+- Real-time collaborative notes app
+- Prepare project architecture and tech stack
+- Divide tasks among team members
+- Create a basic MVP before the event
