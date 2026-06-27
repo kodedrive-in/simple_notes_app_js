@@ -1,3 +1,37 @@
+# My Notes — App Flow
+
+How the app works, end to end. Every note is a `.txt` file inside the `./files` folder — there is no database.
+
+```mermaid
+flowchart TD
+    Start(["🚀 Server starts<br/>app.listen(3000) — index.js"]) --> Home
+
+    Home["GET /<br/>fs.readdir('./files')"] --> HomePage["🏠 Home Page — index.ejs<br/>Create-note form + a card per file"]
+
+    HomePage --> Create["① Fill title + note<br/>click 'Save Note'"]
+    HomePage --> Open["② Click 'Open'<br/>on a note card"]
+    HomePage --> Edit["③ Click 'Edit'<br/>on a note card"]
+    HomePage --> Delete["④ Click 'Delete'<br/>on a note card"]
+
+    Create --> CreateRoute["POST /create<br/>fs.writeFile() → new .txt file"]
+    CreateRoute --> Home
+
+    Open --> OpenRoute["GET /files/:filename<br/>fs.readFile()"]
+    OpenRoute --> OpenPage["📄 open.ejs<br/>Shows title + content read-only"]
+
+    Edit --> EditRoute["GET /edit/:filename<br/>fs.readFile()"]
+    EditRoute --> EditPage["✏️ edit.ejs<br/>Edit form pre-filled"]
+    EditPage --> Save["Click 'Save Changes'"]
+    Save --> EditPostRoute["POST /edit<br/>fs.rename() old→new<br/>fs.writeFile() new content"]
+    EditPostRoute --> Home
+
+    Delete --> DeleteRoute["POST /delete<br/>fs.unlink() removes .txt file"]
+    DeleteRoute --> Home
+```
+                     
+                     
+                     
+                     
                      📝 HOW THE "MY NOTES" APP WORKS
 
                               🚀 Server Starts
@@ -154,3 +188,10 @@
                   ▼
       EJS templates display the result
              as HTML pages.
+
+
+
+
+
+
+             
