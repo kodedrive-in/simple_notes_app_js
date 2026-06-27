@@ -28,123 +28,130 @@
       ---------------------------------------------------------
 
 ==========================================================================
-From the Home Page, the user has FOUR OPTIONS
+                     From the Home Page
+                  The User Has FOUR OPTIONS
 ==========================================================================
 
+
 ① CREATE NEW NOTE
------------------
-User enters:
-    • Title
-    • Note Content
-            │
-            ▼
-     Click "📝 Save Note"
-            │
-            ▼
-        POST /create
-            │
-            ▼
- fs.writeFile(title + ".txt")
-            │
-            ▼
- New text file created in ./files
-            │
-            ▼
- Redirect back to Home Page (/)
-            │
-            ▼
- New note appears
+──────────────────────────────────────────────────────────────────────────
+
+          User enters:
+          • Title
+          • Note Content
+                  │
+                  ▼
+         Click "📝 Save Note"
+                  │
+                  ▼
+             POST /create
+                  │
+                  ▼
+      fs.writeFile(title + ".txt")
+                  │
+                  ▼
+     Creates a new .txt file
+         inside ./files
+                  │
+                  ▼
+          Redirect back to /
+                  │
+                  ▼
+       New note appears on
+          the Home Page
 
 
 ② OPEN NOTE
-------------
-Click "Open"
-      │
-      ▼
-GET /files/:filename
-      │
-      ▼
-fs.readFile()
-      │
-      ▼
-📄 open.ejs
-      │
-      ▼
-Displays:
-    • Title
-    • Full Note Content (Read Only)
+──────────────────────────────────────────────────────────────────────────
+
+          Click "Open"
+                  │
+                  ▼
+      GET /files/:filename
+                  │
+                  ▼
+          fs.readFile()
+                  │
+                  ▼
+          📄 open.ejs Page
+                  │
+                  ▼
+     Displays Title & Content
 
 
 ③ EDIT NOTE
-------------
-Click "Edit"
-      │
-      ▼
-GET /edit/:filename
-      │
-      ▼
-fs.readFile()
-      │
-      ▼
-✏️ edit.ejs
-      │
-      ▼
-User changes:
-    • Title
-    • Content
-      │
-      ▼
-Click "💾 Save Changes"
-      │
-      ▼
-POST /edit
-      │
-      ▼
-fs.rename(oldName → newName)
-      │
-      ▼
-fs.writeFile(newContent)
-      │
-      ▼
-Redirect back to Home Page
-      │
-      ▼
-Updated note is displayed
+──────────────────────────────────────────────────────────────────────────
+
+          Click "Edit"
+                  │
+                  ▼
+      GET /edit/:filename
+                  │
+                  ▼
+          fs.readFile()
+                  │
+                  ▼
+          ✏️ edit.ejs
+                  │
+                  ▼
+      User edits title/content
+                  │
+                  ▼
+      Click "💾 Save Changes"
+                  │
+                  ▼
+            POST /edit
+                  │
+                  ▼
+              fs.rename()
+          old name → new name
+                  │
+                  ▼
+            fs.writeFile()
+          saves new content
+                  │
+                  ▼
+             Redirects to /
+                  │
+                  ▼
+           Back to Home Page,
+       note shows updated info
 
 
 ④ DELETE NOTE
---------------
-Click "Delete"
-      │
-      ▼
-POST /delete
-      │
-      ▼
-fs.unlink()
-      │
-      ▼
-Text file removed from ./files
-      │
-      ▼
-Redirect back to Home Page
-      │
-      ▼
-Note disappears
+──────────────────────────────────────────────────────────────────────────
+
+          Click "Delete"
+                  │
+                  ▼
+          POST /delete
+                  │
+                  ▼
+           fs.unlink()
+                  │
+                  ▼
+      File removed from ./files
+                  │
+                  ▼
+        Redirect back to /
+                  │
+                  ▼
+        Note disappears
 
 
 ==========================================================================
-💡 KEY IDEA
+                              💡 KEY IDEA
 ==========================================================================
 
-There is NO database.
-
-Each note is simply a .txt file stored inside the ./files folder.
-
-Express routes perform:
-    • fs.readdir()  → List notes
-    • fs.writeFile() → Create / Update notes
-    • fs.readFile()  → Open notes
-    • fs.rename()    → Rename notes
-    • fs.unlink()    → Delete notes
-
-EJS templates convert this data into HTML pages that users interact with.
+        There is NO database.
+                  │
+                  ▼
+   Every note is simply a .txt file
+      stored inside ./files folder.
+                  │
+                  ▼
+     Express routes perform file operations
+                  │
+                  ▼
+      EJS templates display the result
+             as HTML pages.
